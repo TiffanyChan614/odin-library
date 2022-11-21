@@ -40,30 +40,36 @@ document.querySelector("#show-btn").addEventListener('click', function(e) {
 document.querySelector("#confirm-btn").addEventListener('click', function(e) {
     e.preventDefault();
     addBookToLibrary(myLibrary);
-    clearBox(".book-cards");
+    clearBox(".book-container");
     hideBookForm();
     displayBooks(myLibrary);
 });
 
 function displayBooks(myLibrary) {
     console.log("I have " + myLibrary.length + " books");
-
-    const book_cards = document.querySelector(".book-cards");
-
     for (i = 0; i < myLibrary.length; i++) {
         let book = myLibrary[i];
         console.log(i, book.name);
-        let div = document.createElement("div");
-        div.className = "book";
-        div.id = `book${i}`
-        book_cards.appendChild(div);
-        const book_div = document.querySelector(`#book${i}`);
-        let book_info = [book.name, book.author, book.pages, book.read];
-        for (j = 0; j < 4; j++){
-            let p = document.createElement("p");
-            p.innerHTML = book_info[j];
-            book_div.appendChild(p);
-        }
+        genBookDiv(".book-container", i);
+        genBookInfo(book, `#book${i}`);
+    }
+}
+
+function genBookDiv(container, book_index) {
+    const book_container = document.querySelector(container);
+    let div = document.createElement("div");
+    div.className = "book";
+    div.id = `book${book_index}`
+    book_container.appendChild(div);
+}
+
+function genBookInfo(book, book_div_ID){
+    const book_div = document.querySelector(book_div_ID);
+    const book_info = [book.name, book.author, book.pages, book.read];
+    for (j = 0; j < 4; j++){
+        let p = document.createElement("p");
+        p.innerHTML = book_info[j];
+        book_div.appendChild(p);
     }
 }
 
