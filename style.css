@@ -9,3 +9,18 @@ html, body {
     background: #fff;
     color: #000;
 }
+
+.form-window {
+    display: none;
+}
+
+.book-cards {
+    width: 100vw;
+    height: 100vh;
+    background-color: aquamarine;
+}
+
+.book {
+    background-color: pink;
+    border: 1px solid red;
+}
