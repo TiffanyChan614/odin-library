@@ -97,6 +97,7 @@ function removeEventHandler(e, i) {
     const book = document.querySelector(`#book${i}`);
     book.remove();
     removeBook(myLibrary, i);
+    refreshLibrary();
 }
 
 function clearBox(element_ID) {
@@ -105,6 +106,11 @@ function clearBox(element_ID) {
 
 function removeBook(myLibrary, book_index) {
     myLibrary.splice(book_index, 1);
+}
+
+function refreshLibrary() {
+    clearBox(".book-container");
+    displayBooks(myLibrary);
 }
 
 displayBooks(myLibrary);
@@ -118,7 +124,7 @@ document.querySelector("#show-btn").addEventListener('click', function(e) {
 document.querySelector("#confirm-btn").addEventListener('click', function(e) {
     e.preventDefault();
     addBookToLibrary(myLibrary);
-    clearBox(".book-container");
+    refreshLibrary();
     hideBookForm();
-    displayBooks(myLibrary);
+
 });
