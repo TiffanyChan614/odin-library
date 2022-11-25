@@ -78,34 +78,23 @@ function genBookAction(book_div_ID, book_index) {
     book_div.appendChild(btn);
 }
 
-function addRemoveEvent() {
-    document.querySelectorAll(".remove").forEach(btn =>
-        btn.addEventListener('click', e => removeEventHandler(e, btn)));
-}
-
 function removeRemoveEvent() {
     document.querySelectorAll(".remove").forEach(btn =>
         btn.removeEventListener('click', e => removeEventHandler(e, btn)));
 }
 
-function removeEventHandler(e, btn) {
+function addRemoveEvent() {
+    const btns = document.querySelectorAll(".remove");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', e => removeEventHandler(e, i));
+    }
+}
+
+function removeEventHandler(e, i) {
     e.preventDefault();
-    console.log('click ', e.target);
-    const book = findBookToRemove(btn);
-    let book_index = findBookIndex(book);
+    const book = document.querySelector(`#book${i}`);
     book.remove();
-    removeBook(myLibrary, book_index);
-}
-
-function findBookToRemove(btn) {
-    const book_action = btn.parentElement;
-    const book = book_action.parentElement;
-    return book;
-}
-
-function findBookIndex(book) {
-    let bookID = book.id;
-     return bookID.replace(/[^0-9]+/gi, '');
+        removeBook(myLibrary, i);
 }
 
 function clearBox(element_ID) {
