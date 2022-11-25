@@ -11,7 +11,7 @@ html, body {
 }
 
 .form-window {
-    /* visibility: none; */
+    display: none;
 }
 
 .book-container {

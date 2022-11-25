@@ -11,12 +11,12 @@ function Book(name, author, pages, read) {
 
 function showBookForm() {
     const form = document.querySelector(".form-window");
-    form.style.visibility = "visible";
+    form.style.display = "block";
 }
 
 function hideBookForm() {
     const form = document.querySelector(".form-window");
-    form.style.visibility = "none";
+    form.style.display = "none";
 }
 
 function addBookToLibrary(myLibrary) {
@@ -38,6 +38,7 @@ function displayBooks(myLibrary) {
         let book = myLibrary[i];
         genBook(book, i);
     }
+    addRemoveEvent();
 }
 
 function genBook(book, i){
@@ -75,7 +76,6 @@ function genBookAction(book_div_ID, book_index) {
     btn.id = `remove${book_index}`;
     btn.textContent = "Remove";
     book_div.appendChild(btn);
-    addRemoveEvent();
 }
 
 function addRemoveEvent() {
@@ -83,10 +83,14 @@ function addRemoveEvent() {
         btn.addEventListener('click', e => removeEventHandler(e, btn)));
 }
 
+function removeRemoveEvent() {
+    document.querySelectorAll(".remove").forEach(btn =>
+        btn.removeEventListener('click', e => removeEventHandler(e, btn)));
+}
+
 function removeEventHandler(e, btn) {
     e.preventDefault();
-    e.stoppropagation();
-    console.log('click');
+    console.log('click ', e.target);
     const book = findBookToRemove(btn);
     let book_index = findBookIndex(book);
     book.remove();
@@ -116,13 +120,14 @@ displayBooks(myLibrary);
 
 document.querySelector("#show-btn").addEventListener('click', function(e) {
     e.preventDefault();
-    // showBookForm();
+    showBookForm();
+    removeRemoveEvent();
 });
 
 document.querySelector("#confirm-btn").addEventListener('click', function(e) {
     e.preventDefault();
     addBookToLibrary(myLibrary);
     clearBox(".book-container");
-    // hideBookForm();
+    hideBookForm();
     displayBooks(myLibrary);
 });
