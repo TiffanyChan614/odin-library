@@ -36,13 +36,17 @@ function displayBooks(myLibrary) {
     console.log("I have " + myLibrary.length + " books");
     for (let i = 0; i < myLibrary.length; i++) {
         let book = myLibrary[i];
-        console.log(i, book.name);
-        genDiv(".book-container", "book", `book${i}`);
-        genDiv(`#book${i}`, "book-info", `book${i}-info`);
-        genDiv(`#book${i}`, "book-action", `book${i}-action`)
-        genBookInfo(book, `#book${i}-info`);
-        genBookAction(`#book${i}-action`, i);
+        genBook(book, i);
     }
+}
+
+function genBook(book, i){
+    console.log(i, book.name);
+    genDiv(".book-container", "book", `book${i}`);
+    genDiv(`#book${i}`, "book-info", `book${i}-info`);
+    genDiv(`#book${i}`, "book-action", `book${i}-action`)
+    genBookInfo(book, `#book${i}-info`);
+    genBookAction(`#book${i}-action`, i);
 }
 
 function genDiv(container, className, element_ID) {
@@ -68,20 +72,36 @@ function genBookAction(book_div_ID, book_index) {
     let btn = document.createElement("button");
     btn.type = "button";
     btn.className = "remove";
-    btn.id = `remove-${book_index}`;
+    btn.id = `remove${book_index}`;
     btn.textContent = "Remove";
     book_div.appendChild(btn);
+    addRemoveEvent();
+}
+
+function addRemoveEvent() {
     document.querySelectorAll(".remove").forEach(btn =>
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('click');
-            const book = btn.parentElement;
-            const book_container = book.parentElement;
-            let bookID = book.id;
-            let book_index = bookID.replace(/[^0-9]+/gi, '');
-            book_container.remove(book);
-            removeBook(myLibrary, book_index);
-    }));
+        btn.addEventListener('click', e => removeEventHandler(e, btn)));
+}
+
+function removeEventHandler(e, btn) {
+    e.preventDefault();
+    e.stoppropagation();
+    console.log('click');
+    const book = findBookToRemove(btn);
+    let book_index = findBookIndex(book);
+    book.remove();
+    removeBook(myLibrary, book_index);
+}
+
+function findBookToRemove(btn) {
+    const book_action = btn.parentElement;
+    const book = book_action.parentElement;
+    return book;
+}
+
+function findBookIndex(book) {
+    let bookID = book.id;
+     return bookID.replace(/[^0-9]+/gi, '');
 }
 
 function clearBox(element_ID) {
@@ -106,14 +126,3 @@ document.querySelector("#confirm-btn").addEventListener('click', function(e) {
     // hideBookForm();
     displayBooks(myLibrary);
 });
-
-// const remove_btns = document.querySelectorAll(".remove");
-// for (let i = 0; i < remove_btns.length; i++) {
-//     remove_btns[i].addEventListener('click', function(e) {
-//         e.preventDefault();
-//         removeBook(myLibrary, i);
-//         removeElements(`#book${i}`);
-//         clearBox(".book-container");
-//         displayBooks(myLibrary);
-//     });
-// }
