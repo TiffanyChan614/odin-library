@@ -10,13 +10,17 @@ html, body {
     color: #000;
 }
 
+body {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .form-window {
     display: none;
 }
 
 .book-container {
-    width: 100vw;
-    height: 100vh;
     background-color: aquamarine;
 }
 
