@@ -79,8 +79,10 @@ function genBookAction(book_div_ID, book_index) {
 }
 
 function removeRemoveEvent() {
-    document.querySelectorAll(".remove").forEach(btn =>
-        btn.removeEventListener('click', e => removeEventHandler(e, btn)));
+    const btns = document.querySelectorAll(".remove");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].removeEventListener('click', e => removeEventHandler(e, i));
+    }
 }
 
 function addRemoveEvent() {
@@ -94,7 +96,7 @@ function removeEventHandler(e, i) {
     e.preventDefault();
     const book = document.querySelector(`#book${i}`);
     book.remove();
-        removeBook(myLibrary, i);
+    removeBook(myLibrary, i);
 }
 
 function clearBox(element_ID) {
