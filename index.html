@@ -9,14 +9,16 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="overlay"></div>
     <header>
         <h1>Tiffany's Library</h1>
     </header>
     <main>
         <div class="actions">
-        <button type="button" id="show-btn">Add book</button>
+            <button type="button" id="add-btn">+ Add book</button>
         </div>
         <div class="form-window">
+            <h2>Add Book</h2>
             <form class="book-form">
                 <div class="form-field">
                     <label for="name">Book name: </label>
@@ -34,8 +36,8 @@
                     <label for="read">Read: </label>
                     <input type="text" id="read" name="read">
                 </div>
-                <button type="submit" id="confirm-btn">Confirm</button>
             </form>
+            <button type="submit" id="confirm-btn">Confirm</button>
         </div>
         <div class="book-container">
         </div>

@@ -11,12 +11,16 @@ function Book(name, author, pages, read) {
 
 function showBookForm() {
     const form = document.querySelector(".form-window");
-    form.style.display = "block";
+    const overlay = document.querySelector("#overlay");
+    form.style.display = "flex";
+    overlay.style.display = "block";
 }
 
 function hideBookForm() {
     const form = document.querySelector(".form-window");
+    const overlay = document.querySelector("#overlay");
     form.style.display = "none";
+    overlay.style.display = "none";
 }
 
 function addBookToLibrary(myLibrary) {
@@ -115,15 +119,15 @@ function refreshLibrary() {
 
 displayBooks(myLibrary);
 
-document.querySelector("#show-btn").addEventListener('click', function(e) {
+document.querySelector("#add-btn").addEventListener('click', function(e) {
     e.preventDefault();
     showBookForm();
-    removeRemoveEvent();
 });
 
 document.querySelector("#confirm-btn").addEventListener('click', function(e) {
     e.preventDefault();
     addBookToLibrary(myLibrary);
+    removeRemoveEvent();
     refreshLibrary();
     hideBookForm();
 
