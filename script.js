@@ -64,12 +64,18 @@ function genDiv(container, className, element_ID) {
 
 function genBookInfo(book, book_div_ID) {
     const book_div = document.querySelector(book_div_ID);
-    const book_info = [book.name, book.author, book.pages, book.read];
-    for (let j = 0; j < 4; j++){
-        let p = document.createElement("p");
-        p.textContent = book_info[j];
-        book_div.appendChild(p);
-    }
+    let name = document.createElement("p");
+    name.textContent = book.name;
+    name.style.fontSize = "1.2rem";
+    book_div.appendChild(name);
+
+    let author = document.createElement("p");
+    author.textContent = "By " + book.author;
+    book_div.appendChild(author);
+
+    let pages = document.createElement("p");
+    pages.textContent = book.pages + " page(s)";
+    book_div.appendChild(pages);
 }
 
 function genBookAction(book_div_ID, book_index) {
