@@ -80,11 +80,21 @@ function genBookInfo(book, book_div_ID) {
 
 function genBookAction(book_div_ID, book_index) {
     const book_div = document.querySelector(book_div_ID);
+    genBtn(book_div, book_index, "read");
+    genBtn(book_div, book_index, "remove");
+}
+
+function capitalizeFirst(word) {
+    word[0].toUpperCase();
+    return word;
+}
+
+function genBtn(book_div, book_index, btn_name) {
     let btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "remove";
-    btn.id = `remove${book_index}`;
-    btn.textContent = "Remove";
+    btn.className = btn_name;
+    btn.id = `${btn_name}${book_index}`;
+    btn.textContent = capitalizeFirst(btn_name);
     book_div.appendChild(btn);
 }
 
