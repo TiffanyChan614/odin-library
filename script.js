@@ -47,9 +47,13 @@ function displayError(error_dict) {
 }
 
 function hideErrorMsg() {
-    const error_msgs = document.querySelectorAll(".error");
+    const error_msgs = document.querySelectorAll("p.error");
+    const error_fields = document.querySelectorAll("input");
     for (let msg of error_msgs) {
         msg.style.display = "none";
+    }
+    for (let field of error_fields) {
+        field.classList.remove("error");
     }
 }
 
