@@ -83,7 +83,7 @@ footer{
 .book-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     font-size: 1.1rem;
     width: 80%;
 }
@@ -93,13 +93,14 @@ footer{
     margin-bottom: 0.5rem;
 }
 
-.form-window label:not([for="read"]),
+.form-window label:not([for="read"]):not([for="unread"]),
 .form-window p {
     display: block;
     width: 8rem;
 }
 
-.form-window label[for="read"] {
+.form-window label[for="read"],
+.form-window label[for="unread"] {
     width: 3rem;
 }
 
@@ -109,7 +110,7 @@ footer{
 }
 
 .form-field input[type="radio"] {
-    width: 2rem;
+    margin-right: 0.5rem;
 }
 
 .form-field input[type="text"],
@@ -119,14 +120,15 @@ footer{
     border-radius: 0.4rem;
     padding: 0.5rem;
     font-size: 1rem;
+    border: none;
 }
 
 #confirm-btn {
     height: 2.5rem;
     width: 10rem;
-    margin-top: 1rem;
     font-size: 1rem;
     background-color: var(--white);
+    align-self: center;
 }
 
 #confirm-btn:hover {
@@ -235,4 +237,8 @@ button {
 .error-msg .error {
     display: none;
     color: var(--red);
+    font-size: 0.8rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-left: 8rem;
 }
