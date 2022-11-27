@@ -95,6 +95,7 @@ function displayBooks() {
         let book = my_library[i];
         genBook(book, i);
     }
+    displayStat();
     addRemoveEvent();
     addReadEvent();
 }
@@ -227,6 +228,28 @@ function removeBook(book_index) {
 function refreshLibrary() {
     clearBox(".book-container");
     displayBooks();
+}
+
+function countRead() {
+    let num_read = 0
+    for (let book of my_library) {
+        if (book.read) {
+            num_read++;
+        }
+    }
+    return num_read;
+}
+
+function displayStat() {
+    const total_p = document.querySelector(".total");
+    const total_read_p = document.querySelector(".total-read");
+    const total_unread_p = document.querySelector(".total-unread");
+    let total = my_library.length;
+    let total_read = countRead();
+    let total_unread = total - total_read;
+    total_p.textContent = `Total Books: ${total}`;
+    total_read_p.textContent = `Books Read: ${total_read}`;
+    total_unread_p.textContent = `Books Unread: ${total_unread}`;
 }
 
 displayBooks();
