@@ -205,6 +205,7 @@ function readEventHandler(e, i, btn) {
         btn.classList.add("true");
         btn.textContent = "Read";
     }
+    refreshLibrary();
 }
 
 function addReadEvent() {
@@ -283,4 +284,10 @@ document.querySelector(".book-form").addEventListener('submit', function(e) {
 document.querySelector("#cancel-btn").addEventListener('click', function(e) {
     e.preventDefault();
     hideBookForm();
+})
+
+document.querySelector("#clear-btn").addEventListener('click', function(e) {
+    e.preventDefault();
+    my_library = [];
+    refreshLibrary();
 })

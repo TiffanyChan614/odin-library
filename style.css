@@ -35,7 +35,7 @@ body {
 
 header {
     flex: 0;
-    padding: 2rem 7%;
+    padding: 2rem 10vw;
     background-color: var(--grey-bg);
     box-shadow: 0 0.2rem 0.7rem 0.2rem var(--header-shadow-color);
     align-items: center;
@@ -46,15 +46,15 @@ h1 {
 }
 
 main {
-    padding: 1rem 7%;
+    padding: 1rem 0;
     flex: 1;
-    justify-self: flex-start;
+    justify-content: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
-footer{
+footer {
     flex-shrink: 0;
     text-align: center;
     font-size: 0.8rem;
@@ -66,6 +66,7 @@ footer{
     gap: 1.5rem;
     font-size: 1rem;
     margin-left: 1rem;
+    margin-bottom: 1rem;
 }
 
 .form-window {
@@ -141,7 +142,6 @@ footer{
     font-size: 1rem;
     background-color: var(--white);
     color: var(--black);
-    align-self: center;
 }
 
 #confirm-btn:hover {
@@ -161,6 +161,7 @@ footer{
     grid-auto-rows: minmax(auto, 1fr);
     gap: 1.2vw;
     border-radius: 0.4rem;
+    width: 84vw;
     overflow: auto;
 }
 
@@ -225,16 +226,16 @@ footer{
     align-self: center;
 }
 
-.actions button {
+.actions button{
     background-color: var(--black);
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     width: 10rem;
-    height: 3rem;
+    height: 2.8rem;
 }
 
 .actions button:hover {
-    background-color: var(--green);
+    border: 0.15rem solid var(--grey);
 }
 
 button {
