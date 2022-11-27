@@ -29,18 +29,20 @@ function addBookToLibrary() {
     const pages = document.querySelector("#pages");
     const read = document.querySelector("#read");
     const unread = document.querySelector("#unread");
-    const error_array = validateBook(name, author, pages, read, unread);
-    if (error_array.length === 0){
+    const error_dict = validateBook(name, author, pages, read, unread);
+    if (Object.keys(error_dict).length === 0){
         let book_to_add = new Book(name.value, author.value, pages.value, read.value);
         my_library.push(book_to_add);
     }
-    return error_array;
+    return error_dict;
 }
 
-function displayErrorMsg(error_array) {
-    for (let error of error_array) {
-        const element = document.querySelector(error);
-        element.style.display = "block";
+function displayError(error_dict) {
+    for (let error of Object.keys(error_dict)) {
+        const error_field = document.querySelector(`#${error}`);
+        const error_msg = document.querySelector(error_dict[error]);
+        error_field.classList.add("error");
+        error_msg.style.display = "block";
     }
 }
 
@@ -52,30 +54,30 @@ function hideErrorMsg() {
 }
 
 function validateBook(name, author, pages, read, unread) {
-    let errorArray = [];
+    let error_dict = {};
 
     if (name.value === "") {
-        errorArray.push("#name-error");
+        error_dict.name = ("#name-error");
     }
     else if (bookExists(name.value, author.value)) {
-        errorArray.push("#duplicate-error");
+        error_dict.name = ("#duplicate-error");
     }
 
     if (author.value === "") {
-        errorArray.push("#author-error");
+        error_dict.author = "#author-error";
     }
 
     if (pages.value.length == 0) {
-        errorArray.push("#pages-error");
+        error_dict.pages = "#pages-error";
     }
     else if (pages.value <= 0) {
-        errorArray.push("#negative-error");
+        error_dict.pages = "#negative-error";
     }
 
     if (!read.checked && !unread.checked) {
-        errorArray.push("#read-error");
+       error_dict.read = "#read-error";
     }
-    return errorArray;
+    return error_dict;
 }
 
 function bookExists(book_name, author) {
@@ -238,15 +240,15 @@ document.querySelector("#add-btn").addEventListener('click', function(e) {
 
 document.querySelector(".book-form").addEventListener('submit', function(e) {
     e.preventDefault();
-    let error_array = addBookToLibrary();
-    console.log(error_array);
+    let error_dict = addBookToLibrary();
+    console.log(error_dict);
     hideBookForm();
-    if (error_array.length === 0) {
+    if (Object.keys(error_dict).length === 0) {
         refreshLibrary();
         hideErrorMsg();
     }
     else {
         showBookForm();
-        displayErrorMsg(error_array);
+        displayError(error_dict);
     }
 });

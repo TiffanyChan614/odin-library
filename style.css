@@ -111,6 +111,7 @@ footer{
 
 .form-field input[type="radio"] {
     margin-right: 0.5rem;
+    border: none;
 }
 
 .form-field input[type="text"],
@@ -241,4 +242,8 @@ button {
     width: 100%;
     margin-top: 0.5rem;
     margin-left: 8rem;
+}
+
+.form-field input.error {
+    border: 0.1rem solid var(--red);
 }
