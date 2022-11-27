@@ -13,8 +13,10 @@
     --white: #ffffff;
     --green: #318b86;
     --red: #d44a68;
-    --light-grey: #9AA5B1;
+    --light-grey: #d0d6dc;
     --grey: #788794;
+    --dark-red: #c5415e;
+    --dark-green:#2d7d79;
 }
 
 html, body{
@@ -171,8 +173,25 @@ footer{
 }
 
 .remove:hover {
+    background-color: var(--light-grey);
+}
+
+.book-action .read.true {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.book-action .read.true:hover {
+    background-color: var(--dark-green);
+}
+
+.book-action .read.false {
     background-color: var(--red);
     color: var(--white);
+}
+
+.book-action .read.false:hover {
+    background-color: var(--dark-red);
 }
 
 .actions {

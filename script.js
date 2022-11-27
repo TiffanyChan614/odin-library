@@ -51,7 +51,7 @@ function genBook(book, i){
     genDiv(`#book${i}`, "book-info", `book${i}-info`);
     genDiv(`#book${i}`, "book-action", `book${i}-action`)
     genBookInfo(book, `#book${i}-info`);
-    genBookAction(`#book${i}-action`, i);
+    genBookAction(`#book${i}-action`, i, book);
 }
 
 function genDiv(container, className, element_ID) {
@@ -78,10 +78,23 @@ function genBookInfo(book, book_div_ID) {
     book_div.appendChild(pages);
 }
 
-function genBookAction(book_div_ID, book_index) {
+function genBookAction(book_div_ID, book_index, book) {
     const book_div = document.querySelector(book_div_ID);
     genBtn(book_div, book_index, "read");
+    setRead(book, book_index);
     genBtn(book_div, book_index, "remove");
+}
+
+function setRead(book, book_index) {
+    const read_btn = document.querySelector(`#read${book_index}`);
+    if (!book.read) {
+        console.log(read_btn, book.read);
+        read_btn.classList.add("false");
+        read_btn.textContent = "Unread";
+    }
+    else {
+        read_btn.classList.add("true");
+    }
 }
 
 function capitalizeFirst(word) {
@@ -119,6 +132,34 @@ function removeEventHandler(e, i) {
     removeBook(myLibrary, i);
     refreshLibrary();
 }
+
+function readEventHandler(e, i, btn) {
+    e.preventDefault();
+    const book = document.querySelector(`#book${i}`);
+    if (book.read){
+        book.read = false;
+        btn.className = "unread";
+    }
+    else {
+        book.read = treu;
+        btn.className = "read";
+    }
+}
+
+function addReadEvent() {
+    const btns = document.querySelectorAll(".read");
+    for (let i = 0; o < btns.length; i++) {
+        btns[i].addEventListener('click', e => readEventHandler(e, i, btns[i]));
+    }
+}
+
+function removeReadEvent() {
+    const btns = document.querySelectorAll(".read");
+    for (let i = 0; o < btns.length; i++) {
+        btns[i].removeEventListener('click', e => readEventHandler(e, i, btns[i]));
+    }
+}
+
 
 function clearBox(element_ID) {
     document.querySelector(element_ID).textContent = "";
