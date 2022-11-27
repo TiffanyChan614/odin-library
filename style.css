@@ -124,16 +124,27 @@ footer{
     border: none;
 }
 
-#confirm-btn {
+.book-form .actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.book-form .actions button {
     height: 2.5rem;
     width: 10rem;
     font-size: 1rem;
     background-color: var(--white);
+    color: var(--black);
     align-self: center;
 }
 
 #confirm-btn:hover {
     background-color: var(--green);
+    color: var(--white);
+}
+
+#cancel-btn:hover {
+    background-color: var(--red);
     color: var(--white);
 }
 

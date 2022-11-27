@@ -252,3 +252,8 @@ document.querySelector(".book-form").addEventListener('submit', function(e) {
         displayError(error_dict);
     }
 });
+
+document.querySelector("#cancel-btn").addEventListener('click', function(e) {
+    e.preventDefault();
+    hideBookForm();
+})
