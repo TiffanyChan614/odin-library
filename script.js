@@ -1,4 +1,4 @@
-let myLibrary = [new Book("The Splendid And The Vile", "Erik Larson", 560, false),
+let my_library = [new Book("The Splendid And The Vile", "Erik Larson", 560, false),
                     new Book("Steve Jobs", "Walter Issacson", 800, false)];
 
 function Book(name, author, pages, read) {
@@ -23,26 +23,78 @@ function hideBookForm() {
     overlay.style.display = "none";
 }
 
-function addBookToLibrary(myLibrary) {
-    const bookToAdd = getNewBook();
-    myLibrary.push(bookToAdd);
+function addBookToLibrary() {
+    const name = document.querySelector("#name");
+    const author = document.querySelector("#author");
+    const pages = document.querySelector("#pages");
+    const read = document.querySelector("#read");
+    const unread = document.querySelector("#unread");
+    const error_array = validateBook(name, author, pages, read, unread);
+    if (error_array.length === 0){
+        let book_to_add = new Book(name.value, author.value, pages.value, read.value);
+        my_library.push(book_to_add);
+    }
+    return error_array;
 }
 
-function getNewBook() {
-    let name = document.querySelector("#name").value;
-    let author = document.querySelector("#author").value;
-    let pages = document.querySelector("#pages").value;
-    let read = document.querySelector("#read").value;
-    return new Book(name, author, pages, read);
+function displayErrorMsg(error_array) {
+    for (let error of error_array) {
+        const element = document.querySelector(error);
+        element.style.display = "block";
+    }
 }
 
-function displayBooks(myLibrary) {
-    console.log("I have " + myLibrary.length + " books");
-    for (let i = 0; i < myLibrary.length; i++) {
-        let book = myLibrary[i];
+function hideErrorMsg() {
+    const error_msgs = document.querySelectorAll(".error");
+    for (let msg of error_msgs) {
+        msg.style.display = "none";
+    }
+}
+
+function validateBook(name, author, pages, read, unread) {
+    let errorArray = [];
+
+    if (name.value === "") {
+        errorArray.push("#name-error");
+    }
+    else if (bookExists(name.value, author.value)) {
+        errorArray.push("#duplicate-error");
+    }
+
+    if (author.value === "") {
+        errorArray.push("#author-error");
+    }
+
+    if (pages.value.length == 0) {
+        errorArray.push("#pages-error");
+    }
+    else if (pages.value.pages <= 0) {
+        errorArray.push("#negative-error");
+    }
+
+    if (!read.checked && !unread.checked) {
+        errorArray.push("#read-error");
+    }
+    return errorArray;
+}
+
+function bookExists(book_name, author) {
+    for (let book of my_library) {
+        if (book.name === book_name && book.author === author) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function displayBooks() {
+    console.log("I have " + my_library.length + " books");
+    for (let i = 0; i < my_library.length; i++) {
+        let book = my_library[i];
         genBook(book, i);
     }
     addRemoveEvent();
+    addReadEvent();
 }
 
 function genBook(book, i){
@@ -88,7 +140,6 @@ function genBookAction(book_div_ID, book_index, book) {
 function setRead(book, book_index) {
     const read_btn = document.querySelector(`#read${book_index}`);
     if (!book.read) {
-        console.log(read_btn, book.read);
         read_btn.classList.add("false");
         read_btn.textContent = "Unread";
     }
@@ -127,65 +178,75 @@ function addRemoveEvent() {
 
 function removeEventHandler(e, i) {
     e.preventDefault();
-    const book = document.querySelector(`#book${i}`);
-    book.remove();
-    removeBook(myLibrary, i);
+    const book_div = document.querySelector(`#book${i}`);
+    book_div.remove();
+    removeBook(i);
     refreshLibrary();
 }
 
 function readEventHandler(e, i, btn) {
     e.preventDefault();
-    const book = document.querySelector(`#book${i}`);
-    if (book.read){
-        book.read = false;
-        btn.className = "unread";
+    if (my_library[i].read){
+        my_library[i].read = false;
+        btn.classList.remove("true");
+        btn.classList.add("false");
+        btn.textContent = "Unread";
     }
     else {
-        book.read = treu;
-        btn.className = "read";
+        my_library[i].read = true;
+        btn.classList.remove("false");
+        btn.classList.add("true");
+        btn.textContent = "Read";
     }
 }
 
 function addReadEvent() {
     const btns = document.querySelectorAll(".read");
-    for (let i = 0; o < btns.length; i++) {
+    for (let i = 0; i < btns.length; i++) {
         btns[i].addEventListener('click', e => readEventHandler(e, i, btns[i]));
     }
 }
 
 function removeReadEvent() {
     const btns = document.querySelectorAll(".read");
-    for (let i = 0; o < btns.length; i++) {
+    for (let i = 0; i < btns.length; i++) {
         btns[i].removeEventListener('click', e => readEventHandler(e, i, btns[i]));
     }
 }
-
 
 function clearBox(element_ID) {
     document.querySelector(element_ID).textContent = "";
 }
 
-function removeBook(myLibrary, book_index) {
-    myLibrary.splice(book_index, 1);
+function removeBook(book_index) {
+    my_library.splice(book_index, 1);
 }
 
 function refreshLibrary() {
     clearBox(".book-container");
-    displayBooks(myLibrary);
+    displayBooks();
 }
 
-displayBooks(myLibrary);
+displayBooks();
 
 document.querySelector("#add-btn").addEventListener('click', function(e) {
     e.preventDefault();
     showBookForm();
+    removeRemoveEvent();
+    removeReadEvent();
 });
 
-document.querySelector("#confirm-btn").addEventListener('click', function(e) {
+document.querySelector(".book-form").addEventListener('submit', function(e) {
     e.preventDefault();
-    addBookToLibrary(myLibrary);
-    removeRemoveEvent();
-    refreshLibrary();
+    let error_array = addBookToLibrary();
+    console.log(error_array);
     hideBookForm();
-
+    if (error_array.length === 0) {
+        refreshLibrary();
+        hideErrorMsg();
+    }
+    else {
+        showBookForm();
+        displayErrorMsg(error_array);
+    }
 });

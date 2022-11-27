@@ -19,25 +19,42 @@
         </div>
         <div class="form-window">
             <h2>Add Book</h2>
-            <form class="book-form">
+            <form class="book-form" action="">
                 <div class="form-field">
                     <label for="name">Book name: </label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="error-msg">
+                    <p class="error" id="name-error">*Book name is required</p>
+                    <p class="error" id="duplicate-error">*This book already exists in your library</p>
                 </div>
                 <div class="form-field">
                     <label for="author">Author: </label>
                     <input type="text" id="author" name="author">
                 </div>
+                <div class="error-msg">
+                    <p class="error" id="author-error">*Author name is required</p>
+                </div>
                 <div class="form-field">
                     <label for="pages">Pages: </label>
-                    <input type="text" id="pages" name="pages">
+                    <input type="number" id="pages" name="pages">
+                </div>
+                <div class="error-msg">
+                    <p class="error" id="pages-error">*Author name is required</p>
+                    <p class=error id="negative-error">*Number of pages must be greater than 0</p>
                 </div>
                 <div class="form-field">
-                    <label for="read">Read: </label>
-                    <input type="text" id="read" name="read">
+                    <p>Read: </p>
+                    <input type="radio" id="read" name="read" value="true">
+                    <label for="read">Yes</label>
+                    <input type="radio" id="unread" name="read" value="false">
+                    <label for="unread">No</label>
                 </div>
+                <div class="error-msg">
+                    <p class="error" id="read-error">*Read status is required</p>
+                </div>
+                <button type="submit" id="confirm-btn">Confirm</button>
             </form>
-            <button type="submit" id="confirm-btn">Confirm</button>
         </div>
         <div class="book-container">
         </div>
