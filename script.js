@@ -68,7 +68,7 @@ function validateBook(name, author, pages, read, unread) {
     if (pages.value.length == 0) {
         errorArray.push("#pages-error");
     }
-    else if (pages.value.pages <= 0) {
+    else if (pages.value <= 0) {
         errorArray.push("#negative-error");
     }
 
