@@ -85,8 +85,8 @@ function genBookAction(book_div_ID, book_index) {
 }
 
 function capitalizeFirst(word) {
-    word[0].toUpperCase();
-    return word;
+    let cap_word = word[0].toUpperCase() + word.substring(1);
+    return cap_word;
 }
 
 function genBtn(book_div, book_index, btn_name) {
