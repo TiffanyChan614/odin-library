@@ -1,6 +1,20 @@
 let my_library = [new Book("The Splendid And The Vile", "Erik Larson", 560, false),
                     new Book("Steve Jobs", "Walter Issacson", 800, false)];
 
+const form = document.querySelector(".form-window");
+const overlay = document.querySelector("#overlay");
+const book_name = document.querySelector("#name");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const read = document.querySelector("#read");
+const unread = document.querySelector("#unread");
+const error_msgs = document.querySelectorAll(".error-msg");
+const error_fields = document.querySelectorAll("input");
+const total_p = document.querySelector(".total");
+const total_read_p = document.querySelector(".total-read");
+const total_unread_p = document.querySelector(".total-unread");
+const book_form = document.querySelector(".book-form");
+
 function Book(name, author, pages, read) {
     // the constructor
     this.name = name;
@@ -10,26 +24,17 @@ function Book(name, author, pages, read) {
 }
 
 function showBookForm() {
-    const form = document.querySelector(".form-window");
-    const overlay = document.querySelector("#overlay");
     form.style.display = "flex";
     overlay.style.display = "block";
 }
 
 function hideBookForm() {
-    const form = document.querySelector(".form-window");
-    const overlay = document.querySelector("#overlay");
     form.style.display = "none";
     overlay.style.display = "none";
 }
 
 function addBookToLibrary() {
-    const name = document.querySelector("#name");
-    const author = document.querySelector("#author");
-    const pages = document.querySelector("#pages");
-    const read = document.querySelector("#read");
-    const unread = document.querySelector("#unread");
-    const error_dict = validateBook(name, author, pages, read, unread);
+    const error_dict = validateBook(book_name, author, pages, read, unread);
     let isRead;
     if (read.checked) {
         isRead = true;
@@ -38,7 +43,7 @@ function addBookToLibrary() {
         isRead = false;
     }
     if (Object.keys(error_dict).length === 0){
-        let book_to_add = new Book(name.value, author.value, pages.value, isRead);
+        let book_to_add = new Book(book_name.value, author.value, pages.value, isRead);
         my_library.push(book_to_add);
     }
     return error_dict;
@@ -54,8 +59,6 @@ function displayError(error_dict) {
 }
 
 function hideErrorMsg() {
-    const error_msgs = document.querySelectorAll(".error-msg");
-    const error_fields = document.querySelectorAll("input");
     for (let msg of error_msgs) {
         msg.style.display = "none";
     }
@@ -247,12 +250,7 @@ function editEventHandler(e, i) {
     e.preventDefault();
     showBookForm();
     let book = my_library[i];
-    const name = document.querySelector("#name");
-    const author = document.querySelector("#author");
-    const pages = document.querySelector("#pages");
-    const read = document.querySelector("#read");
-    const unread = document.querySelector("#unread");
-    name.value = book.name;
+    book_name.value = book.name;
     author.value = book.author;
     pages.value = book.pages;
     if (book.read) {
@@ -262,7 +260,7 @@ function editEventHandler(e, i) {
         unread.checked = true;
     }
     removeBook(i);
-    console.log(name.value, author.value, pages.value, read.checked, unread.checked);
+    console.log(book_name.value, author.value, pages.value, read.checked, unread.checked);
 }
 
 function clearBox(element_ID) {
@@ -289,9 +287,6 @@ function countRead() {
 }
 
 function displayStat() {
-    const total_p = document.querySelector(".total");
-    const total_read_p = document.querySelector(".total-read");
-    const total_unread_p = document.querySelector(".total-unread");
     let total = my_library.length;
     let total_read = countRead();
     let total_unread = total - total_read;
@@ -301,7 +296,6 @@ function displayStat() {
 }
 
 function resetForm() {
-    const book_form = document.querySelector(".book-form");
     book_form.reset();
 }
 
