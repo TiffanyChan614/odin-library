@@ -104,7 +104,6 @@ function bookExists(book_name, author) {
 }
 
 function displayBooks() {
-    console.log("I have " + my_library.length + " books");
     for (let i = 0; i < my_library.length; i++) {
         let book = my_library[i];
         genBook(book, i);
@@ -116,7 +115,6 @@ function displayBooks() {
 }
 
 function genBook(book, i){
-    console.log(i, book.name);
     genDiv(".book-container", "book", `book${i}`);
     genDiv(`#book${i}`, "book-info", `book${i}-info`);
     genDiv(`#book${i}`, "book-actions", `book${i}-action`)
@@ -260,7 +258,6 @@ function editEventHandler(e, i) {
         unread.checked = true;
     }
     removeBook(i);
-    console.log(book_name.value, author.value, pages.value, read.checked, unread.checked);
 }
 
 function clearBox(element_ID) {
@@ -311,8 +308,6 @@ document.querySelector("#add-btn").addEventListener('click', function(e) {
 
 document.querySelector(".book-form").addEventListener('submit', function(e) {
     e.preventDefault();
-    let error_dict = addBookToLibrary();
-    console.log(error_dict);
     hideBookForm();
     if (Object.keys(error_dict).length === 0) {
         refreshLibrary();
