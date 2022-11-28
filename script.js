@@ -12,6 +12,9 @@ const total_p = document.querySelector(".total");
 const total_read_p = document.querySelector(".total-read");
 const total_unread_p = document.querySelector(".total-unread");
 const book_form = document.querySelector(".book-form");
+const clear_btn = document.querySelector("#clear-btn");
+const cancel_btn = document.querySelector("#cancel-btn");
+const add_btn = document.querySelector("#add-btn");
 
 function Book(name, author, pages, read) {
     // the constructor
@@ -298,7 +301,7 @@ function resetForm() {
 
 displayBooks();
 
-document.querySelector("#add-btn").addEventListener('click', function(e) {
+add_btn.addEventListener('click', function(e) {
     e.preventDefault();
     showBookForm();
     removeRemoveEvent();
@@ -306,10 +309,11 @@ document.querySelector("#add-btn").addEventListener('click', function(e) {
     removeReadEvent();
 });
 
-document.querySelector(".book-form").addEventListener('submit', function(e) {
+book_form.addEventListener('submit', function(e) {
     e.preventDefault();
     hideBookForm();
     let error_dict = addBookToLibrary();
+    console.log(error_dict);
     if (Object.keys(error_dict).length === 0) {
         refreshLibrary();
         resetForm();
@@ -322,12 +326,12 @@ document.querySelector(".book-form").addEventListener('submit', function(e) {
     }
 });
 
-document.querySelector("#cancel-btn").addEventListener('click', function(e) {
+cancel_btn.addEventListener('click', function(e) {
     e.preventDefault();
     hideBookForm();
 })
 
-document.querySelector("#clear-btn").addEventListener('click', function(e) {
+clear_btn.addEventListener('click', function(e) {
     e.preventDefault();
     my_library = [];
     refreshLibrary();
