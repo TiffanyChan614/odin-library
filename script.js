@@ -101,6 +101,7 @@ function displayBooks() {
     }
     displayStat();
     addRemoveEvent();
+    addEditEvent();
     addReadEvent();
 }
 
@@ -141,6 +142,7 @@ function genBookAction(book_div_ID, book_index, book) {
     const book_div = document.querySelector(book_div_ID);
     genBtn(book_div, book_index, "read");
     setRead(book, book_index);
+    genBtn (book_div, book_index, "edit");
     genBtn(book_div, book_index, "remove");
 }
 
@@ -175,7 +177,6 @@ function removeRemoveEvent() {
         btns[i].removeEventListener('click', e => removeEventHandler(e, i));
     }
 }
-
 function addRemoveEvent() {
     const btns = document.querySelectorAll(".remove");
     for (let i = 0; i < btns.length; i++) {
@@ -189,6 +190,20 @@ function removeEventHandler(e, i) {
     book_div.remove();
     removeBook(i);
     refreshLibrary();
+}
+
+function addReadEvent() {
+    const btns = document.querySelectorAll(".read");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', e => readEventHandler(e, i, btns[i]));
+    }
+}
+
+function removeReadEvent() {
+    const btns = document.querySelectorAll(".read");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].removeEventListener('click', e => readEventHandler(e, i, btns[i]));
+    }
 }
 
 function readEventHandler(e, i, btn) {
@@ -208,18 +223,38 @@ function readEventHandler(e, i, btn) {
     refreshLibrary();
 }
 
-function addReadEvent() {
-    const btns = document.querySelectorAll(".read");
+function addEditEvent() {
+    const btns = document.querySelectorAll(".edit");
     for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', e => readEventHandler(e, i, btns[i]));
+        btns[i].addEventListener('click', e => editEventHandler(e, i));
     }
 }
 
-function removeReadEvent() {
-    const btns = document.querySelectorAll(".read");
+function removeEditEvent() {
+    const btns = document.querySelectorAll(".edit");
     for (let i = 0; i < btns.length; i++) {
-        btns[i].removeEventListener('click', e => readEventHandler(e, i, btns[i]));
+        btns[i].removeEventListener('click', e => editEventHandler(e, i));
     }
+}
+function editEventHandler(e, i) {
+    e.preventDefault();
+    showBookForm();
+    let book = my_library[i];
+    const name = document.querySelector("#name");
+    const author = document.querySelector("#author");
+    const pages = document.querySelector("#pages");
+    const read = document.querySelector("#read");
+    const unread = document.querySelector("#unread");
+    name.value = book.name;
+    author.value = book.author;
+    pages.value = book.pages;
+    if (book.read) {
+        read.checked = true;
+    }
+    else {
+        unread.checked = true;
+    }
+    console.log(name.value, author.value, pages.value, read.checked, unread.checked);
 }
 
 function clearBox(element_ID) {
@@ -263,6 +298,7 @@ document.querySelector("#add-btn").addEventListener('click', function(e) {
     e.preventDefault();
     showBookForm();
     removeRemoveEvent();
+    removeEditEvent();
     removeReadEvent();
 });
 

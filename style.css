@@ -197,10 +197,10 @@ footer {
     color: var(--black);
     width: 100%;
     height: 2.5rem;
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
-.remove:hover {
+.remove:hover, .edit:hover {
     background-color: var(--light-grey);
 }
 
