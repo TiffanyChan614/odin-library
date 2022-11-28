@@ -30,8 +30,15 @@ function addBookToLibrary() {
     const read = document.querySelector("#read");
     const unread = document.querySelector("#unread");
     const error_dict = validateBook(name, author, pages, read, unread);
+    let isRead;
+    if (read.checked) {
+        isRead = true;
+    }
+    else {
+        isRead = false;
+    }
     if (Object.keys(error_dict).length === 0){
-        let book_to_add = new Book(name.value, author.value, pages.value, read.value);
+        let book_to_add = new Book(name.value, author.value, pages.value, isRead);
         my_library.push(book_to_add);
     }
     return error_dict;
