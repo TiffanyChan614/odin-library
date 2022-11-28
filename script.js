@@ -300,6 +300,11 @@ function displayStat() {
     total_unread_p.textContent = `Books Unread: ${total_unread}`;
 }
 
+function resetForm() {
+    const book_form = document.querySelector(".book-form");
+    book_form.reset();
+}
+
 displayBooks();
 
 document.querySelector("#add-btn").addEventListener('click', function(e) {
@@ -317,6 +322,7 @@ document.querySelector(".book-form").addEventListener('submit', function(e) {
     hideBookForm();
     if (Object.keys(error_dict).length === 0) {
         refreshLibrary();
+        resetForm();
         hideErrorMsg();
     }
     else {
