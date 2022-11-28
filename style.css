@@ -17,6 +17,7 @@
     --grey: #788794;
     --dark-red: #b03a53;
     --dark-green:#256562;
+    --placeholder-color: #999999;
 }
 
 html, body{
@@ -265,4 +266,8 @@ input[type="number"] {
 
 .form-field input.error {
     border: 0.1rem solid var(--red);
+}
+
+input::placeholder {
+    color: var(--placeholder-color);
 }
