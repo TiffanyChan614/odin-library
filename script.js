@@ -313,6 +313,7 @@ document.querySelector(".book-form").addEventListener('submit', function(e) {
     }
     else {
         showBookForm();
+        hideErrorMsg();
         displayError(error_dict);
     }
 });
