@@ -15,6 +15,8 @@ const book_form = document.querySelector(".book-form");
 const clear_btn = document.querySelector("#clear-btn");
 const cancel_btn = document.querySelector("#cancel-btn");
 const add_btn = document.querySelector("#add-btn");
+const error_msgs = document.querySelectorAll(".error-msg");
+const error_fields = document.querySelectorAll("input");
 
 function Book(name, author, pages, read) {
     // the constructor
@@ -60,8 +62,6 @@ function displayError(error_dict) {
 }
 
 function hideErrorMsg() {
-    const error_msgs = document.querySelectorAll(".error-msg");
-    const error_fields = document.querySelectorAll("input");
     for (let msg of error_msgs) {
         msg.style.display = "none";
     }
@@ -183,15 +183,15 @@ function genBtn(book_div, book_index, btn_name) {
 }
 
 function removeRemoveEvent() {
-    const btns = document.querySelectorAll(".remove");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].removeEventListener('click', e => removeEventHandler(e, i));
+    const remove_btns = document.querySelectorAll(".remove");
+    for (let i = 0; i < remove_btns.length; i++) {
+        remove_btns[i].removeEventListener('click', e => removeEventHandler(e, i));
     }
 }
 function addRemoveEvent() {
-    const btns = document.querySelectorAll(".remove");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', e => removeEventHandler(e, i));
+    const remove_btns = document.querySelectorAll(".remove");
+    for (let i = 0; i < remove_btns.length; i++) {
+        remove_btns[i].addEventListener('click', e => removeEventHandler(e, i));
     }
 }
 
@@ -204,16 +204,16 @@ function removeEventHandler(e, i) {
 }
 
 function addReadEvent() {
-    const btns = document.querySelectorAll(".read");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', e => readEventHandler(e, i, btns[i]));
+    const read_btns = document.querySelectorAll(".read");
+    for (let i = 0; i < read_btns.length; i++) {
+        read_btns[i].addEventListener('click', e => readEventHandler(e, i, read_btns[i]));
     }
 }
 
 function removeReadEvent() {
-    const btns = document.querySelectorAll(".read");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].removeEventListener('click', e => readEventHandler(e, i, btns[i]));
+    const read_btns = document.querySelectorAll(".read");
+    for (let i = 0; i < read_btns.length; i++) {
+        read_btns[i].removeEventListener('click', e => readEventHandler(e, i, read_btns[i]));
     }
 }
 
@@ -235,16 +235,16 @@ function readEventHandler(e, i, btn) {
 }
 
 function addEditEvent() {
-    const btns = document.querySelectorAll(".edit");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', e => editEventHandler(e, i));
+    const edit_btns = document.querySelectorAll(".edit");
+    for (let i = 0; i < edit_btns.length; i++) {
+        edit_btns[i].addEventListener('click', e => editEventHandler(e, i));
     }
 }
 
 function removeEditEvent() {
-    const btns = document.querySelectorAll(".edit");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].removeEventListener('click', e => editEventHandler(e, i));
+    const edit_btns = document.querySelectorAll(".edit");
+    for (let i = 0; i < edit_btns.length; i++) {
+        edit_btns[i].removeEventListener('click', e => editEventHandler(e, i));
     }
 }
 function editEventHandler(e, i) {
@@ -313,7 +313,6 @@ book_form.addEventListener('submit', function(e) {
     e.preventDefault();
     hideBookForm();
     let error_dict = addBookToLibrary();
-    console.log(error_dict);
     if (Object.keys(error_dict).length === 0) {
         refreshLibrary();
         resetForm();
