@@ -54,7 +54,7 @@ function displayError(error_dict) {
 }
 
 function hideErrorMsg() {
-    const error_msgs = document.querySelectorAll("p.error");
+    const error_msgs = document.querySelectorAll(".error-msg");
     const error_fields = document.querySelectorAll("input");
     for (let msg of error_msgs) {
         msg.style.display = "none";
@@ -116,7 +116,7 @@ function genBook(book, i){
     console.log(i, book.name);
     genDiv(".book-container", "book", `book${i}`);
     genDiv(`#book${i}`, "book-info", `book${i}-info`);
-    genDiv(`#book${i}`, "book-action", `book${i}-action`)
+    genDiv(`#book${i}`, "book-actions", `book${i}-action`)
     genBookInfo(book, `#book${i}-info`);
     genBookAction(`#book${i}-action`, i, book);
 }
@@ -131,7 +131,7 @@ function genDiv(container, className, element_ID) {
 
 function genBookInfo(book, book_div_ID) {
     const book_div = document.querySelector(book_div_ID);
-    let name = document.createElement("p");
+    let name = document.createElement("h3");
     name.textContent = book.name;
     name.style.fontSize = "1.2rem";
     book_div.appendChild(name);

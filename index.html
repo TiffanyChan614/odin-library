@@ -31,9 +31,9 @@
                         <label for="name">Book name: </label>
                         <input type="text" id="name" name="name">
                     </div>
-                    <div class="error-msg">
-                        <p class="error" id="name-error">*Book name is required</p>
-                        <p class="error" id="duplicate-error">*This book already exists in your library</p>
+                    <div class="error-div">
+                        <p class="error-msg" id="name-error">*Book name is required</p>
+                        <p class="error-msg" id="duplicate-error">*This book already exists in your library</p>
                     </div>
                 </div>
                 <div class="form-section">
@@ -41,8 +41,8 @@
                         <label for="author">Author: </label>
                         <input type="text" id="author" name="author">
                     </div>
-                    <div class="error-msg">
-                        <p class="error" id="author-error">*Author name is required</p>
+                    <div class="error-div">
+                        <p class="error-msg" id="author-error">*Author name is required</p>
                     </div>
                 </div>
                 <div class="form-section">
@@ -50,9 +50,9 @@
                         <label for="pages">Pages: </label>
                         <input type="number" id="pages" name="pages">
                     </div>
-                    <div class="error-msg">
-                        <p class="error" id="pages-error">*Number of pages is required</p>
-                        <p class=error id="negative-error">*Number of pages must be greater than 0</p>
+                    <div class="error-div">
+                        <p class="error-msg" id="pages-error">*Number of pages is required</p>
+                        <p class=error-msg id="negative-error">*Number of pages must be greater than 0</p>
                     </div>
                 </div>
                 <div class="form-section">
@@ -63,11 +63,11 @@
                         <input type="radio" id="unread" name="read" value="false">
                         <label for="unread">No</label>
                     </div>
-                    <div class="error-msg">
-                        <p class="error" id="read-error">*Read status is required</p>
+                    <div class="error-div">
+                        <p class="error-msg" id="read-error">*Read status is required</p>
                     </div>
                 </div>
-                <div class="actions">
+                <div class="form-actions">
                     <button type="submit" id="confirm-btn">Confirm</button>
                     <button type="button" id="cancel-btn">Cancel</button>
                 </div>

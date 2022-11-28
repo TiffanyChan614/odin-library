@@ -45,6 +45,11 @@ h1 {
     font-weight: 500;
 }
 
+button {
+    border: none;
+    border-radius: 0.4rem;
+}
+
 main {
     padding: 1rem 0;
     flex: 1;
@@ -101,13 +106,13 @@ footer {
 }
 
 .form-window label:not([for="read"]):not([for="unread"]),
-.form-window p {
+.form-window p:not(.error-msg) {
     display: block;
     width: 8rem;
 }
 
-.form-window label[for="read"],
-.form-window label[for="unread"] {
+label[for="read"],
+label[for="unread"] {
     width: 3rem;
 }
 
@@ -116,13 +121,13 @@ footer {
     align-items: center;
 }
 
-.form-field input[type="radio"] {
+input[type="radio"] {
     margin-right: 0.5rem;
     border: none;
 }
 
-.form-field input[type="text"],
-.form-field input[type="number"] {
+input[type="text"],
+input[type="number"] {
     flex: 1 1 auto;
     height: 1.8rem;
     border-radius: 0.4rem;
@@ -131,12 +136,13 @@ footer {
     border: none;
 }
 
-.book-form .actions {
+.form-actions {
     display: flex;
     gap: 1rem;
+    justify-content: center;
 }
 
-.book-form .actions button {
+.form-actions button {
     height: 2.5rem;
     width: 10rem;
     font-size: 1rem;
@@ -183,7 +189,7 @@ footer {
     box-shadow: 0 0 0.5rem 0.1rem var(--box-shadow-color);
 }
 
-.book-info, .book-action {
+.book-info, .book-actions {
     min-width: 80%;
     text-align: center;
     display: flex;
@@ -192,7 +198,7 @@ footer {
     gap: 1rem;
 }
 
-.book-action button{
+.book-actions button{
     background-color: var(--white);
     color: var(--black);
     width: 70%;
@@ -204,21 +210,21 @@ footer {
     background-color: var(--light-grey);
 }
 
-.book-action .read.true {
+.read.true {
     background-color: var(--green);
     color: var(--white);
 }
 
-.book-action .read.true:hover {
+.read.true:hover {
     background-color: var(--dark-green);
 }
 
-.book-action .read.false {
+.read.false {
     background-color: var(--red);
     color: var(--white);
 }
 
-.book-action .read.false:hover {
+.read.false:hover {
     background-color: var(--dark-red);
 }
 
@@ -226,7 +232,7 @@ footer {
     align-self: center;
 }
 
-.actions button{
+.actions button {
     background-color: var(--black);
     color: var(--white);
     font-size: 1.3rem;
@@ -236,11 +242,6 @@ footer {
 
 .actions button:hover {
     border: 0.15rem solid var(--grey);
-}
-
-button {
-    border: none;
-    border-radius: 0.4rem;
 }
 
 #overlay {
@@ -253,7 +254,7 @@ button {
     z-index: 1;
 }
 
-.error-msg .error {
+.error-msg {
     display: none;
     color: var(--red);
     font-size: 0.8rem;
