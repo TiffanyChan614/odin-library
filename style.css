@@ -171,7 +171,7 @@ footer {
     display: flex;
     flex-direction: column;
     overflow: auto;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     gap: 1rem;
     position: relative;
     top: 0;

@@ -254,6 +254,7 @@ function editEventHandler(e, i) {
     else {
         unread.checked = true;
     }
+    removeBook(i);
     console.log(name.value, author.value, pages.value, read.checked, unread.checked);
 }
 
