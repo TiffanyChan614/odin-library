@@ -8,8 +8,6 @@ const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
 const read = document.querySelector("#read");
 const unread = document.querySelector("#unread");
-const error_msgs = document.querySelectorAll(".error-msg");
-const error_fields = document.querySelectorAll("input");
 const total_p = document.querySelector(".total");
 const total_read_p = document.querySelector(".total-read");
 const total_unread_p = document.querySelector(".total-unread");
@@ -34,7 +32,7 @@ function hideBookForm() {
 }
 
 function addBookToLibrary() {
-    const error_dict = validateBook(book_name, author, pages, read, unread);
+    let error_dict = validateBook(book_name, author, pages, read, unread);
     let isRead;
     if (read.checked) {
         isRead = true;
@@ -59,6 +57,8 @@ function displayError(error_dict) {
 }
 
 function hideErrorMsg() {
+    const error_msgs = document.querySelectorAll(".error-msg");
+    const error_fields = document.querySelectorAll("input");
     for (let msg of error_msgs) {
         msg.style.display = "none";
     }
@@ -309,6 +309,7 @@ document.querySelector("#add-btn").addEventListener('click', function(e) {
 document.querySelector(".book-form").addEventListener('submit', function(e) {
     e.preventDefault();
     hideBookForm();
+    let error_dict = addBookToLibrary();
     if (Object.keys(error_dict).length === 0) {
         refreshLibrary();
         resetForm();
