@@ -327,6 +327,7 @@ book_form.addEventListener('submit', function(e) {
 
 cancel_btn.addEventListener('click', function(e) {
     e.preventDefault();
+    hideErrorMsg();
     hideBookForm();
 })
 
