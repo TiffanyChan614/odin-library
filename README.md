@@ -46,6 +46,7 @@ Start the server
 - Objects and object constructors
 - DOM manipulation
 - Local storage
+- Form validation
 
 ## License
 
